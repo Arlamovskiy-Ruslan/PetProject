@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Account</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header"/>
+<div class="container mt-5">
+    <h1>Your Profile</h1>
+    <div th:each="us : ${users}">
+        First Name:<h2 th:text="${us.first_name}"/>
+        Name:<h3 th:text="${us.name}"/>
+        Last Name:<h4 th:text="${us.last_name}"/>
+        Age:<h5 th:text="${us.age}"/>
+        Gender:<h6 th:text="${us.gender}"/>
+        Posts:<h7 th:text="${us.posts}"/>
+        Followers:<h8 th:text="${us.followers}"/>
+    </div>
+</div>
+
+</body>
+</html>
