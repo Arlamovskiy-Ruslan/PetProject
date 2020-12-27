@@ -12,11 +12,11 @@ public class UserPageController {
     @Autowired
     private UserRepo userRepository;
 
-    @GetMapping("/userPage")
+    @GetMapping("/user-page")
     public String people(Model model) {
         Iterable<User> users = userRepository.findAll();
         model.addAttribute("users", users);
-        return "userPage";
+        return "user-page";
     }
 
 }

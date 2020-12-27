@@ -12,11 +12,16 @@ public class UserController {
     @Autowired
     private UserRepo userRepository;
 
-    @GetMapping("/users")
+    @GetMapping("/user-search")
     public String people(Model model) {
         Iterable<User> users = userRepository.findAll();
         model.addAttribute("users", users);
-        return "users";
+        return "user-search";
+    }
+
+    @GetMapping("/sign-up")
+    public String registration(Model model) {
+        return "sign-up";
     }
 
 }
