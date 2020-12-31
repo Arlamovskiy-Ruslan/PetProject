@@ -7,6 +7,13 @@
 </head>
 <body>
 <header th:insert="blocks/header"/>
+<div class="container mt-5">
+    <div th:each="us : ${users}">
+        Ім'я: <a th:text="${us.name}"  />
+        Дата:<a th:text="${us.date}"  />
+        Час:<a th:text="${us.time}"  />
+    </div>
+</div>
 
 </body>
 </html>

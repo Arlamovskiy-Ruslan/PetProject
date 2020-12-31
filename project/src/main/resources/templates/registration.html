@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Сторінка реєстрації</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header"/>
+<div class="container mt-5">
+    <h1 align="center">Регістрація</h1>
+    <form action="/sign-up" method="post">
+        <input type="text" name="first_name" placeholder="First name" class="form-control"><br/>
+        <input type="text" name="name" placeholder="Name" class="form-control"><br/>
+        <input type="text" name="last_name" placeholder="Last name" class="form-control"><br/>
+        <input type="date" name="date" placeholder="Date" class="form-control"><br/>
+        <input type="time" name="time" placeholder="Time" class="form-control"><br/>
+        <button type="submit" class="btn btn-success">Зареєстуватись</button>
+    </form>
+</div>
+</body>
+</html>
+

@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Date;
+import java.sql.Time;
 
 @Entity
 public class User {
@@ -14,19 +16,16 @@ public class User {
     private String name;
     private String first_name;
     private String last_name;
-    private String gender;
+    private Date date;
+    private Time time;
 
+    public Date getDate() { return date; }
 
-    public String getNick_name() {
-        return nick_name;
-    }
+    public void setDate(Date date) { this.date = date; }
 
-    public void setNick_name(String nick_name) {
-        this.nick_name = nick_name;
-    }
+    public Time getTime() { return time; }
 
-    private String nick_name;
-    private int age,followers,posts;
+    public void setTime(Time time) { this.time = time; }
 
     public String getFirst_name() {
         return first_name;
@@ -42,38 +41,6 @@ public class User {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(int followers) {
-        this.followers = followers;
-    }
-
-    public int getPosts() {
-        return posts;
-    }
-
-    public void setPosts(int posts) {
-        this.posts = posts;
     }
 
     public Long getId() {

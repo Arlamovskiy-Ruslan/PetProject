@@ -8,15 +8,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class UserPageController {
+public class RegisterController {
     @Autowired
     private UserRepo userRepository;
 
-    @GetMapping("/user-page")
-    public String people(Model model) {
+    @GetMapping("/records")
+    public String records(Model model) {
         Iterable<User> users = userRepository.findAll();
         model.addAttribute("users", users);
-        return "user-page";
+        return "records";
     }
+
+    @GetMapping("/registration")
+    public String registration(Model model) {
+        Iterable<User> users = userRepository.findAll();
+        model.addAttribute("users", users);
+        return "registration";
+    }
+
+
 
 }
