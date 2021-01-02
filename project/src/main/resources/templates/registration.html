@@ -9,12 +9,12 @@
 <header th:insert="blocks/header"/>
 <div class="container mt-5">
     <h1 align="center">Регістрація</h1>
-    <form action="/sign-up" method="post">
-        <input type="text" name="first_name" placeholder="First name" class="form-control"><br/>
-        <input type="text" name="name" placeholder="Name" class="form-control"><br/>
-        <input type="text" name="last_name" placeholder="Last name" class="form-control"><br/>
-        <input type="date" name="date" placeholder="Date" class="form-control"><br/>
-        <input type="time" name="time" placeholder="Time" class="form-control"><br/>
+    <form action="/registration" method="post">
+        <input type="text" name="first_name" placeholder="Прізвище" class="form-control"><br/>
+        <input type="text" name="name" placeholder="Ім'я" class="form-control"><br/>
+        <input type="text" name="last_name" placeholder="По батькові" class="form-control"><br/>
+        <textarea name="problem" placeholder="Що вас турбує?" class="form-control"></textarea><br/>
+
         <button type="submit" class="btn btn-success">Зареєстуватись</button>
     </form>
 </div>

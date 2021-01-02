@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDateTime;
 
 @Entity
 public class User {
@@ -16,16 +17,28 @@ public class User {
     private String name;
     private String first_name;
     private String last_name;
-    private Date date;
-    private Time time;
+    private String problem;
 
-    public Date getDate() { return date; }
+    public String getProblem() {
+        return problem;
+    }
 
-    public void setDate(Date date) { this.date = date; }
+    public void setProblem(String problem) {
+        this.problem = problem;
+    }
 
-    public Time getTime() { return time; }
+    public User(String first_name, String name, String last_name,String problem) {
+        this.first_name = first_name;
+        this.name = name;
+        this.last_name = last_name;
+        this.problem = problem;
 
-    public void setTime(Time time) { this.time = time; }
+
+    }
+
+    public User() {
+    }
+
 
     public String getFirst_name() {
         return first_name;
