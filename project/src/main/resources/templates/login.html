@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head>
+    <title>Сторінка реєстрації</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="d-flex h-100 text-center text-white bg-dark">
+    <h3  align="center">Pet Project</h3><br/>
+    <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link" href="/">Головна</a>
+        <a class="nav-link" href="/record-add"> Реєстрація на прийом </a>
+        <a class="nav-link" href="/records"> Записи </a>
+        <a class="nav-link" href="/about"> Про нас </a>
+
+            <div sec:sec:authorize="isAnonymous()" class="from-inline my-2 my-lg-0">
+                <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Увійти</a>
+
+        </div>
+    </nav>
+</div>
+
+<<div class="container">
+    <div class="row py-2">
+        <div class="col-12">
+            <form th:action="@{/authenticateTheUser}" method="post">
+                <div class="form-group">
+                    <label for="username">Імя користувача</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Введіть імя">
+                    <small class="form-text text-danger" th:if="${param.error != null}">Некоррекне імя або пароль</small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Введіть пароль">
+                </div>
+                <button type="submit" class="btn btn-success">Увійти</button>
+                <a class="px-3" th:href="@{/register}">Зарегіструватися</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

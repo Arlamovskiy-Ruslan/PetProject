@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head>
     <title>People</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -16,7 +17,23 @@
     </style>
 </head>
 <body>
-<header th:insert="blocks/header"/>
+
+<div class="d-flex h-100 text-center text-white bg-dark">
+    <h3  align="center">Pet Project</h3><br/>
+    <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link" href="/">Головна</a>
+        <a class="nav-link" href="/record-add"> Реєстрація на прийом </a>
+        <a class="nav-link" href="/records"> Записи </a>
+        <a class="nav-link" href="/about"> Про нас </a>
+            <form sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+                <button class="btn btn-outline-success my-2 my-sm-0">Вийти</button>
+            </form>
+            <div sec:authorize="isAnonymous()" class="from-inline my-2 my-lg-0">
+                <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Увійти</a>
+        </div>
+    </nav>
+</div>
+
 <div class="container mt-5">
     <h2 align="center">Прайс лист</h2>
     <div class="price_list" >

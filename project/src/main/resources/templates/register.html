@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head>
+    <title>Сторінка реєстрації</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="d-flex h-100 text-center text-white bg-dark">
+    <h3  align="center">Pet Project</h3><br/>
+    <nav class="nav nav-masthead justify-content-center float-md-end">
+        <a class="nav-link" href="/">Головна</a>
+        <a class="nav-link" href="/record-add"> Реєстрація на прийом </a>
+        <a class="nav-link" href="/records"> Записи </a>
+        <a class="nav-link" href="/about"> Про нас </a>
+
+            <div sec:authorize="isAnonymous()" class="from-inline my-2 my-lg-0">
+                <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Увійти</a>
+
+        </div>
+    </nav>
+</div>
+
+<div class="container mt-5">
+    <h1 align="center">Регістрація</h1>
+    <form th:action="@{/register}" method="post" th:object="${user}">
+
+        <div class="form-group">
+        <input type="text" id="username" th:field="*{username}" placeholder="Ім'я" class="form-control"><br/>
+            <small class="form-text text-danger" th:each="err : ${#fields.errors('username')} ">Validation error</small>
+        </div>
+        <div class="form-group">
+        <input type="password" id="password" th:field="*{password}" placeholder="Пароль" class="form-control">
+            <small class="form-text text-danger" th:each="err : ${#fields.errors('password')} ">Validation error</small>
+        </div>
+        <div class="form-group">
+            <input type="password" id="repeatPassword" th:field="*{repeatPassword}" placeholder="Повторіть пароль" class="form-control">
+            <small class="form-text text-danger" th:each="err : ${#fields.errors('repeatPassword')} ">Validation error</small>
+        </div>
+
+        <button type="submit" class="btn btn-success">Зареєстуватись</button>
+    </form>
+</div>
+</body>
+</html>

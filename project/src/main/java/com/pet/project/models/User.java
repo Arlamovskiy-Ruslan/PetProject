@@ -1,59 +1,31 @@
 package com.pet.project.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.util.List;
+
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
-    private String first_name;
-    private String last_name;
-    private String problem;
+    @Column(unique = true , nullable = false)
+    private String username;
+    @Column(nullable = false)
+    private String password;
 
-    public String getProblem() {
-        return problem;
-    }
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<UserRecord> userRecords;
 
-    public void setProblem(String problem) {
-        this.problem = problem;
-    }
+    public User(String username, String password) {
 
-    public User(String first_name, String name, String last_name,String problem) {
-        this.first_name = first_name;
-        this.name = name;
-        this.last_name = last_name;
-        this.problem = problem;
-
-
-    }
-
-    public User() {
-    }
-
-
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+        this.username = username;
+        this.password = password;
     }
 
     public Long getId() {
@@ -64,11 +36,30 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public User() {
+    }
+
+    public List<UserRecord> getUserRecords() {
+        return userRecords;
+    }
+
+    public void setUserRecords(List<UserRecord> userRecords) {
+        this.userRecords = userRecords;
     }
 }
