@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface UserRecordRepo extends CrudRepository<UserRecord,Long> {
-    
+
     List<UserRecord> findByUserUsername(String username);
 }

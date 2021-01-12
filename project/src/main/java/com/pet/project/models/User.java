@@ -1,19 +1,46 @@
 package com.pet.project.models;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
-
+@Data
 @Entity
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true , nullable = false)
+    @Column(nullable = false)
     private String username;
     @Column(nullable = false)
     private String password;
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public User(Role role, Status status) {
+        this.role = role;
+        this.status = status;
+    }
 
     @OneToMany(
             mappedBy = "user",
@@ -27,6 +54,7 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
 
     public Long getId() {
         return id;

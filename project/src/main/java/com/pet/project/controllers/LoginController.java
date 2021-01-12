@@ -1,6 +1,6 @@
 package com.pet.project.controllers;
 
-import com.pet.project.service.UserRepr;
+import com.pet.project.models.User;
 import com.pet.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,19 +30,12 @@ public class LoginController {
 
     @GetMapping("/register")
     public String registerPage(Model model) {
-        model.addAttribute("user",new UserRepr());
+        model.addAttribute("user",new User());
         return "register";
     }
     @PostMapping("/register")
-    public String registerPost(@Valid UserRepr userRepr, BindingResult bindingResult) {
-       if(bindingResult.hasErrors()){
-           return "register";
-       }
-        if (!userRepr.getPassword().equals(userRepr.getRepeatPassword())){
-            bindingResult.rejectValue("password","","Паролі не співпадають");
-            return "register";
-        }
-        userService.create(userRepr);
+    public String registerPost(@Valid User user, BindingResult bindingResult) {
+        userService.create(user);
         return "redirect:/login";
     }
 

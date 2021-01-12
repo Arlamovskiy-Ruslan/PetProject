@@ -10,7 +10,7 @@ public class ProjectApplication {
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
+		return new BCryptPasswordEncoder(12);
 	}
 
 	public static void main(String[] args) {

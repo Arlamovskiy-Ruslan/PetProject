@@ -27,11 +27,11 @@
     <div class="row py-2">
         <div class="col-12">
             <form th:action="@{/authenticateTheUser}" method="post">
+
                 <div class="form-group">
-                    <label for="username">Імя користувача</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Введіть імя">
-                    <small class="form-text text-danger" th:if="${param.error != null}">Некоррекне імя або пароль</small>
-                </div>
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                    </div>
                 <div class="form-group">
                     <label for="password">Пароль</label>
                     <input type="password" class="form-control" id="password" name="password" placeholder="Введіть пароль">
