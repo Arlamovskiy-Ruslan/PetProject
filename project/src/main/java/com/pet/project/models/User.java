@@ -1,33 +1,41 @@
 package com.pet.project.models;
 
 import lombok.Data;
+import lombok.Value;
+import org.springframework.security.authentication.jaas.AuthorityGranter;
 
 import javax.persistence.*;
 import java.util.List;
 
+
+
 @Data
 @Entity
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
     private String username;
+
     @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false,columnDefinition = "varchar(32) default 'USER'")
     @Enumerated(value = EnumType.STRING)
-    private Role role;
+    private Role role = Role.USER;
+
+    @Column(nullable = false,columnDefinition ="varchar(32) default 'ACTIVE'" )
     @Enumerated(value = EnumType.STRING)
-    private Status status;
+    private Status status = Status.ACTIVE;
 
     public Role getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+    public void setRole(Role role) { this.role = role; }
 
     public Status getStatus() {
         return status;

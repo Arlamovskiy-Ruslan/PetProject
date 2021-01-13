@@ -2,7 +2,11 @@ package com.pet.project.models;
 
 public enum Permission {
     READ("user:read"),
-    WRITE("user:write");
+    ADD("user:add"),
+    EDIT("user:edit"),
+    DELETE("user:delete"),
+    CHANGE_STATUS("user:change_status"),
+    CHANGE_ROLE("user:change_role");
 
     private final String permission;
 

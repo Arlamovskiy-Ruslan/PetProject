@@ -29,6 +29,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
             <button class="btn btn-outline-success my-2 my-sm-0">Вийти</button>
         </form>
 
+        <div sec:authorize="hasAnyAuthority('user:write',
+                                            'user:add',
+                                            'user:edit',
+                                            'user:delete',
+                                            'user:change_status',
+                                            'user:change_role')" class="from-inline my-2 my-lg-0">
+            <a class="btn btn-outline-success my-2 mr-2 my-sm-0">Admin/Moder Panel</a>
+        </div>
+
     </nav>
 </div>
 
