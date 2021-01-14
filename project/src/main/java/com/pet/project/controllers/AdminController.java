@@ -1,25 +1,32 @@
 package com.pet.project.controllers;
 
 import com.pet.project.models.User;
+import com.pet.project.models.UserRecord;
+import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;
-import com.pet.project.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 
 @Controller
 public class AdminController {
 
-    private UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(RecordController.class);
+
+    private final UserRecordRepo userRecordRepo;
+
     private UserRepo userRepo;
 
-    public AdminController(UserRepo userRepo) {
+    public AdminController(UserRecordRepo userRecordRepo, UserRepo userRepo) {
+        this.userRecordRepo = userRecordRepo;
         this.userRepo = userRepo;
     }
 
@@ -47,5 +54,4 @@ public class AdminController {
         model.addAttribute("user_page_control",res);
         return "user-page-control";
     }
-
 }

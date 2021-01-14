@@ -40,7 +40,7 @@
 
 <div class="container mt-5">
     <h2 align="center">Профіль користувача</h2>
-    <div class="user-list" th:each="us : ${user_page_control}">
+    <div class="user-page" th:each="us : ${user_page_control}">
         <p> <b>Id:</b> <a class="color_text_id" th:text="${us.id}"/><br/>
             <b>User:</b> <a class="color_text_username" th:text="${us.username}"/><br/>
             <b>Role:</b> <a class="color_text_role" th:text="${us.role}"/><br/>
