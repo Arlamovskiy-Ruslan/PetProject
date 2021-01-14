@@ -14,13 +14,16 @@
             font-family: 'Lato', sans-serif;
             font-size: 16px;
         }
+        .color_text_id{
+            color: #0056ff
+        }
         .color_text_username{
             color: #7e3410
         }
-        color_text_role{
+        .color_text_role{
             color: #34c315
         }
-        color_text_status{
+        .color_text_status{
             color: #34c315
         }
     </style>
@@ -62,6 +65,7 @@
                 <td class="color_text_role" th:text="${us.role}"></td>
                 <td class="color_text_status" th:text="${us.status}"></td>
                 <td><a sec:authorize="hasAnyAuthority('user:delete')" th:href="@{user-delete/{id}(id=${us.id})}">Delete</a></td>
+                <td><a sec:authorize="hasAnyAuthority('user:add')" th:href="@{/user/{id}(id=${us.id})}">Profile</a></td>
             </tr>
             </tbody>
         </table>

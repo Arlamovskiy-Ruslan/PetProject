@@ -8,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Controller
@@ -35,5 +36,16 @@ public class AdminController {
         return "redirect:/user-list";
     }
 
+    @GetMapping("/user/{id}")
+    public String userDetails(@PathVariable(value = "id")long id,Model model){
+        if(!userRepo.existsById(id)){
+            return "redirect:/user-list";
+        }
+        Optional<User> user = userRepo.findById(id);
+        ArrayList<User> res = new ArrayList<>();
+        user.ifPresent(res::add);
+        model.addAttribute("user_page_control",res);
+        return "user-page-control";
+    }
 
 }
