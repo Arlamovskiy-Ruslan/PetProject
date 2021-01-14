@@ -6,17 +6,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style type="text/css">
-        .record {
+        .user-list {
             background-color: #feeff4;
-            border-left: 6px solid #e04386;
+            border-left: 6px solid #ACF8E2;
             color: #49152c;
             padding: 20px 35px;
             font-family: 'Lato', sans-serif;
             font-size: 16px;
         }
+        .color_text_username{
+            color: #7e3410
+        }
+        color_text_role{
+            color: #34c315
+        }
+        color_text_status{
+            color: #34c315
+        }
     </style>
-
-
 </head>
 <body>
 
@@ -27,32 +34,25 @@
         <a class="nav-link" href="/record-add"> Реєстрація на прийом </a>
         <a class="nav-link" href="/records"> Записи </a>
         <a class="nav-link" href="/about"> Про нас </a>
-
         <form sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
             <button class="btn btn-outline-success my-2 my-sm-0">Вийти</button>
         </form>
-
-        <div class="from-inline my-2 my-lg-0" sec:authorize="hasAnyAuthority('user:write',
-                                            'user:add',
-                                            'user:edit',
-                                            'user:delete',
-                                            'user:change_status',
-                                            'user:change_role')">
-            <a class="btn btn-outline-success my-2 mr-2 my-sm-0" href="/user-list" >Admin/Moder Panel</a>
+        <div sec:authorize="isAnonymous()" class="from-inline my-2 my-lg-0">
+            <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Увійти</a>
         </div>
-
     </nav>
 </div>
 
 <div class="container mt-5">
-    <h2 align="center">Записи</h2>
-    <div class="record" th:each="us : ${users_rec}">
-        <p><b>Прізвище :</b> <a th:text="${us.first_name}"/><br/>
-        <b>Ім'я :</b><a th:text="${us.name}"  /><br/>
-            <b>Проблема :</b><a th:text="${us.problem}"  /></p>
-
+    <h2 align="center">Адмін/Модер панель</h2>
+    <div class="user-list" th:each="us : ${user_list}">
+        <p> <b>Id:</b> <a class="color_text_id" th:text="${us.id}"/><br/>
+            <b>User:</b> <a class="color_text_username" th:text="${us.username}"/><br/>
+            <b>Role:</b> <a class="color_text_role" th:text="${us.role}"/><br/>
+            <b>Status:</b> <a class="color_text_status" th:text="${us.status}"/><br/>
+        <td><a th:href="@{user-delete/{ id }(id=${us.id})}">Delete</a></td><br/>
+        <b>__________________________________________________________________</b></p>
     </div>
 </div>
-
 </body>
 </html>

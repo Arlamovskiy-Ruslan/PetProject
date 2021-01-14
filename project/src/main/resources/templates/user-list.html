@@ -43,14 +43,28 @@
     </nav>
 </div>
 
-<div class="container mt-5">
+<div class="container mt-5" th:switch="${user_list}">
     <h2 align="center">Адмін/Модер панель</h2>
-    <div class="user-list" th:each="us : ${user_list}">
-
-        <p><b>User:</b> <a class="color_text_username" th:text="${us.username}"  /><br/>
-            <b>Role:</b> <a class="color_text_role" th:text="${us.role}"  /><br/>
-            <b>Status:</b> <a class="color_text_status" th:text="${us.status}"  />
-            <b>__________________________________________________________________</b></p>
+    <div class="user-list" th:case="*">
+        <table>
+            <thead>
+            <tr>
+                <th><b>Id</b></th>
+                <th><b>User</b></th>
+                <th><b>Role</b></th>
+                <th><b>Status</b></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="us : ${user_list}">
+                <td class="color_text_id" th:text="${us.id}"></td>
+                <td class="color_text_username" th:text="${us.username}"></td>
+                <td class="color_text_role" th:text="${us.role}"></td>
+                <td class="color_text_status" th:text="${us.status}"></td>
+                <td><a th:href="@{user-delete/{id}(id=${us.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>

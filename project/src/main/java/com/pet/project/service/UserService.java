@@ -7,11 +7,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Service
 public class UserService {
 
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
 
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -27,4 +28,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userr.getPassword()));
         userRepo.save(user);
     }
+
+
 }
