@@ -3,12 +3,10 @@ package com.pet.project.controllers;
 import com.pet.project.models.User;
 import com.pet.project.repo.UserRepo;
 import com.pet.project.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +29,7 @@ public class AdminController {
     }
 
     @GetMapping("user-delete/{id}")
+    @PreAuthorize("hasAuthority('user:delete')")
     public String deleteUser(@PathVariable("id")long id){
         userRepo.deleteById(id);
         return "redirect:/user-list";

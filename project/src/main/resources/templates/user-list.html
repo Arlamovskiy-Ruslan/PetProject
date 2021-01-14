@@ -61,7 +61,7 @@
                 <td class="color_text_username" th:text="${us.username}"></td>
                 <td class="color_text_role" th:text="${us.role}"></td>
                 <td class="color_text_status" th:text="${us.status}"></td>
-                <td><a th:href="@{user-delete/{id}(id=${us.id})}">Delete</a></td>
+                <td><a sec:authorize="hasAnyAuthority('user:delete')" th:href="@{user-delete/{id}(id=${us.id})}">Delete</a></td>
             </tr>
             </tbody>
         </table>
