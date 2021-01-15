@@ -1,8 +1,6 @@
 package com.pet.project.models;
 
 import lombok.Data;
-import lombok.Value;
-import org.springframework.security.authentication.jaas.AuthorityGranter;
 
 import javax.persistence.*;
 import java.util.List;
