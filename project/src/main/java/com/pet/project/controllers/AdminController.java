@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -31,6 +31,7 @@ public class AdminController {
     }
 
     @GetMapping("/user-list")
+    @PreAuthorize("hasAuthority('user:edit')")
     public String userList(Model model) {
         model.addAttribute("user_list",userRepo.findAll());
         return "user-list";
@@ -44,6 +45,7 @@ public class AdminController {
     }
 
     @GetMapping("/user/{id}")
+    @PreAuthorize("hasAuthority('user:edit')")
     public String userDetails(@PathVariable(value = "id")long id,Model model){
         if(!userRepo.existsById(id)){
             return "redirect:/user-list";
@@ -69,7 +71,7 @@ public class AdminController {
 
     @PostMapping("/user/{id}/edit")
     @PreAuthorize("hasAuthority('user:edit')")
-    public String userEditPost(@PathVariable(value = "id")long id, @RequestParam String username, @RequestParam Role role, @RequestParam Status status, Model model){
+    public String userEditPost(@PathVariable(value = "id")long id, @RequestParam String username, @RequestParam Status status, Model model){
         User user = userRepo.findById(id).orElseThrow();
         user.setUsername(username);
         user.setStatus(status);
