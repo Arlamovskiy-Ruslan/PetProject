@@ -54,6 +54,7 @@
             <tr>
                 <th><b>Id</b></th>
                 <th><b>User</b></th>
+                <th><b>Email</b></th>
                 <th><b>Role</b></th>
                 <th><b>Status</b></th>
                 <th sec:authorize="hasAnyAuthority('user:delete')"><b>Delete</b></th>
@@ -67,6 +68,7 @@
             <tr th:each="us : ${user_list}">
                 <td class="color_text_id" th:text="${us.id}"></td>
                 <td class="color_text_username" th:text="${us.username}"></td>
+                <td class="color_text_email" th:text="${us.email}"></td>
                 <td class="color_text_role" th:text="${us.role}"></td>
                 <td class="color_text_status" th:text="${us.status}"></td>
                 <td><a sec:authorize="hasAnyAuthority('user:delete')" th:href="@{user-delete/{id}(id=${us.id})}">Delete</a></td>
