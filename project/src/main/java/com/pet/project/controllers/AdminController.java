@@ -5,6 +5,7 @@ import com.pet.project.models.Status;
 import com.pet.project.models.User;
 import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;
+import com.pet.project.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,7 +25,8 @@ public class AdminController {
 
     private final UserRecordRepo userRecordRepo;
 
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
+
 
     public AdminController(UserRecordRepo userRecordRepo, UserRepo userRepo) {
         this.userRecordRepo = userRecordRepo;

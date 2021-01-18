@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -29,5 +31,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userr.getPassword()));
         userRepo.save(user);
     }
+
 
 }

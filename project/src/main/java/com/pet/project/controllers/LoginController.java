@@ -1,19 +1,26 @@
 package com.pet.project.controllers;
 
 import com.pet.project.models.User;
+import com.pet.project.repo.UserRepo;
 import com.pet.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Optional;
 
 
 @Controller
 public class LoginController {
+
+    private UserRepo userRepo;
 
     private final UserService userService;
 
@@ -38,5 +45,6 @@ public class LoginController {
         userService.create(user);
         return "redirect:/login";
     }
+
 
 }

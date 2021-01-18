@@ -43,7 +43,7 @@
     <div class="user-page" th:each="us : ${user_page_control}">
         <p> <b>Id:</b> <a class="color_text_id" th:text="${us.id}"/><br/>
             <b>User:</b> <a class="color_text_username" th:text="${us.username}"/><br/>
-            <b>User:</b> <a class="color_text_email" th:text="${us.email}"/><br/>
+            <b>Email:</b> <a class="color_text_email" th:text="${us.email}"/><br/>
             <b>Role:</b> <a class="color_text_role" th:text="${us.role}"/><br/>
             <b>Status:</b> <a class="color_text_status" th:text="${us.status}"/></p>
     </div>

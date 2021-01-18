@@ -39,9 +39,7 @@
                                             'user:change_role')" class="from-inline my-2 my-lg-0">
             <a class="btn btn-outline-success my-2 mr-2 my-sm-0" href="/user-list" >Admin/Moder Panel</a>
         </div>
-        <a sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:text="${username}" method="get"/>
-
-
+        <a sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:text="${username}" />
     </nav>
 </div>
 
