@@ -5,8 +5,10 @@ import com.pet.project.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Service
 public class UserService {
@@ -27,6 +29,5 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userr.getPassword()));
         userRepo.save(user);
     }
-
 
 }

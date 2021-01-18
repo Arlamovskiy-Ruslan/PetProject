@@ -43,6 +43,7 @@
         <div sec:authorize="isAnonymous()" class="from-inline my-2 my-lg-0">
             <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Увійти</a>
         </div>
+        <a sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:text="${username}" method="get"/>
     </nav>
 </div>
 

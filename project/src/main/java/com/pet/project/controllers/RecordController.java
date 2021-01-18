@@ -32,12 +32,15 @@ public class RecordController {
     public String records(Model model , Principal principal) {
         logger.info("User name: {}", principal.getName());
         model.addAttribute("users_rec", userRecordRepo.findByUserUsername(principal.getName()));
+        String name = principal.getName();
+        model.addAttribute("username",name);
         return "records";
     }
 
     @GetMapping("/record-add")
-    public String reсord_add(Model model) {
-
+    public String reсord_add(Model model, Principal principal) {
+        String name = principal.getName();
+        model.addAttribute("username",name);
         return "record-add";
 
     }

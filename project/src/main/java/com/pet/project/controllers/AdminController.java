@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,9 @@ public class AdminController {
 
     @GetMapping("/user-list")
     @PreAuthorize("hasAuthority('user:edit')")
-    public String userList(Model model) {
+    public String userList(Model model, Principal principal) {
+        String name = principal.getName();
+        model.addAttribute("username",name);
         model.addAttribute("user_list",userRepo.findAll());
         return "user-list";
     }

@@ -37,6 +37,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
                                             'user:change_role')" class="from-inline my-2 my-lg-0">
             <a class="btn btn-outline-success my-2 mr-2 my-sm-0" href="/user-list" >Admin/Moder Panel</a>
         </div>
+        <a sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:text="${username}" method="get"/>
 
     </nav>
 </div>
@@ -45,13 +46,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
     <h2 align="center">Інформація про нас</h2>
     <div class="about" >
         <p><b>Адреса:</b>XXXXXXX</p>
-        <p><b>Номер телефону:</b>XXXXXXXXXX</p>
-        <p><b>Електронна адреса:</b>XXXXXXXX</p>
-        <p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-            XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+        <p><b>Номер телефону:</b>+380 (99) 000 00 00</p>
+        <p><b>Електронна адреса:</b>testspring453@gmail.com</p>
+        <p>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
     </div>
 </div>
 
