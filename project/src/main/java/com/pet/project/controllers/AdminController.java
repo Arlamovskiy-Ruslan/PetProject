@@ -48,18 +48,6 @@ public class AdminController {
         return "redirect:/user-list";
     }
 
-    @GetMapping("/user/{id}")
-    @PreAuthorize("hasAuthority('user:edit')")
-    public String userDetails(@PathVariable(value = "id")long id,Model model){
-        if(!userRepo.existsById(id)){
-            return "redirect:/user-list";
-        }
-        Optional<User> user = userRepo.findById(id);
-        ArrayList<User> res = new ArrayList<>();
-        user.ifPresent(res::add);
-        model.addAttribute("user_page_control",res);
-        return "user-page-control";
-    }
     @GetMapping("/user/{id}/edit")
     @PreAuthorize("hasAuthority('user:edit')")
     public String userEdit(@PathVariable(value = "id")long id,Model model){

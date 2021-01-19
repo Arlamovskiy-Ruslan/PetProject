@@ -59,7 +59,6 @@
                 <th><b>Role</b></th>
                 <th><b>Status</b></th>
                 <th sec:authorize="hasAnyAuthority('user:delete')"><b>Delete</b></th>
-                <th sec:authorize="hasAnyAuthority('user:add')"><b>Profile</b></th>
                 <th sec:authorize="hasAnyAuthority('user:edit')"><b>Edit</b></th>
                 <th sec:authorize="hasAnyAuthority('user:change_role')"><b>Change Role</b></th>
 
@@ -73,7 +72,6 @@
                 <td class="color_text_role" th:text="${us.role}"></td>
                 <td class="color_text_status" th:text="${us.status}"></td>
                 <td><a sec:authorize="hasAnyAuthority('user:delete')" th:href="@{user-delete/{id}(id=${us.id})}">Delete</a></td>
-                <td><a sec:authorize="hasAnyAuthority('user:add')" th:href="@{/user/{id}(id=${us.id})}">Profile</a></td>
                 <td><a sec:authorize="hasAnyAuthority('user:edit')" th:href="@{/user/{id}/edit(id=${us.id})}">Edit</a></td>
                 <td><a sec:authorize="hasAnyAuthority('user:change_role')" th:href="@{/user/{id}/change-role(id=${us.id})}">Change Role</a></td>
             </tr>
