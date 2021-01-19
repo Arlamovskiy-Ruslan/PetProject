@@ -1,26 +1,28 @@
 package com.pet.project.service;
 
 import com.pet.project.models.User;
+import com.pet.project.models.UserRecord;
+import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class UserService {
+
+    private final UserRecordRepo userRecordRepo;
 
     private final UserRepo userRepo;
 
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepo userRepo, BCryptPasswordEncoder passwordEncoder){
+    public UserService(UserRecordRepo userRecordRepo, UserRepo userRepo, BCryptPasswordEncoder passwordEncoder){
+        this.userRecordRepo = userRecordRepo;
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
@@ -32,5 +34,9 @@ public class UserService {
         userRepo.save(user);
     }
 
-
+    public void recordAdd(UserRecord record,Principal principal){
+        User user = userRepo.findByUsername(principal.getName()).get();
+        record.setUser(user);
+        userRecordRepo.save(record);
+    }
 }

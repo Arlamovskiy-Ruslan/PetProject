@@ -4,8 +4,10 @@ import com.pet.project.models.User;
 import com.pet.project.models.UserRecord;
 import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;
+import com.pet.project.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +25,13 @@ public class RecordController {
 
     private final UserRepo userRepo;
 
-    public RecordController(UserRecordRepo userRecordRepo, UserRepo userRepo) {
+    @Autowired
+    private final UserService userService;
+
+    public RecordController(UserRecordRepo userRecordRepo, UserRepo userRepo, UserService userService) {
         this.userRecordRepo = userRecordRepo;
         this.userRepo = userRepo;
+        this.userService = userService;
     }
 
     @GetMapping("/records")
@@ -53,9 +59,7 @@ public class RecordController {
             ,@RequestParam String last_name
             ,@RequestParam String problem
             , UserRecord record , Principal principal) {
-        User user = userRepo.findByUsername(principal.getName()).get();
-        record.setUser(user);
-        userRecordRepo.save(record);
+        userService.recordAdd(record,principal);
         UserRecord user_rec_add = new UserRecord(first_name,name,last_name,problem);
         userRecordRepo.save(user_rec_add);
         return "redirect:/records";
