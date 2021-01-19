@@ -1,6 +1,5 @@
 package com.pet.project.controllers;
 
-import com.pet.project.models.User;
 import com.pet.project.models.UserRecord;
 import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;

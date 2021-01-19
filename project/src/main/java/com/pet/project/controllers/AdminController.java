@@ -5,7 +5,6 @@ import com.pet.project.models.Status;
 import com.pet.project.models.User;
 import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;
-import com.pet.project.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 
 @Controller
