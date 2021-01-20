@@ -22,11 +22,5 @@ public class MainController {
         return "home";
     }
 
-    @GetMapping("/about")
-    public String about(Model model,Principal principal) {
-        String name = principal.getName();
-        model.addAttribute("username",name);
-        return "about";
-    }
 
 }
