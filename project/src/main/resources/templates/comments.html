@@ -1,20 +1,10 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head>
-    <title>Home</title>
+    <title>Record Add</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style type="text/css">
-        .price_list {
-            background-color: #feeff4;
-            border-left: 6px solid #ACF8E2;
-            color: #49152c;
-            padding: 20px 35px;
-            font-family: 'Lato', sans-serif;
-            font-size: 16px;
-        }
-    </style>
 </head>
 <body>
 
@@ -25,12 +15,11 @@
         <a class="nav-link" href="/record-add"> Реєстрація на прийом </a>
         <a class="nav-link" href="/records"> Записи </a>
         <a class="nav-link" href="/comments"> Відгуки </a>
-            <form sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
-                <button class="btn btn-outline-success my-2 my-sm-0">Вийти</button>
-            </form>
-            <div sec:authorize="isAnonymous()" class="from-inline my-2 my-lg-0">
-                <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Увійти</a>
-        </div>
+
+        <form sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+            <button class="btn btn-outline-success my-2 my-sm-0">Вийти</button>
+        </form>
+
         <div sec:authorize="hasAnyAuthority('user:write',
                                             'user:add',
                                             'user:edit',
@@ -40,16 +29,16 @@
             <a class="btn btn-outline-success my-2 mr-2 my-sm-0" href="/user-list" >Admin/Moder Panel</a>
         </div>
         <a sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:text="${username}" />
+
     </nav>
 </div>
 
 <div class="container mt-5">
-    <h2 align="center">Прайс лист</h2>
-    <div class="price_list" >
-        <p><b>1-</b>250 грн.</p>
-        <p><b>2-</b>150 грн.</p>
-        <p><b>3-</b>100 грн.</p>
-    </div>
+    <h1 align="center">Додати відгук</h1>
+    <form action="/comments" method="post">
+        <textarea name="problem" placeholder="Відгук" class="form-control"></textarea><br/>
+        <button type="submit" class="btn btn-success">Добавити</button>
+    </form>
 </div>
 </body>
 </html>

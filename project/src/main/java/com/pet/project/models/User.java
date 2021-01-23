@@ -58,6 +58,13 @@ public class User {
     )
     private List<UserRecord> userRecords;
 
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Comments> comments;
+
     public User(String username, String password,String email) {
         this.email = email;
         this.username = username;
@@ -96,11 +103,13 @@ public class User {
     public User() {
     }
 
-    public List<UserRecord> getUserRecords() {
-        return userRecords;
-    }
+    public List<UserRecord> getUserRecords() { return userRecords; }
 
     public void setUserRecords(List<UserRecord> userRecords) {
         this.userRecords = userRecords;
     }
+
+    public List<Comments> getComments() { return comments; }
+
+    public void setComments(List<Comments> comments) { this.comments = comments; }
 }
