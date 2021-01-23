@@ -14,15 +14,13 @@ import java.security.Principal;
 @Service
 public class UserService {
 
-    private final UserRecordRepo userRecordRepo;
-
     private final UserRepo userRepo;
 
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRecordRepo userRecordRepo, UserRepo userRepo, BCryptPasswordEncoder passwordEncoder){
-        this.userRecordRepo = userRecordRepo;
+    public UserService(UserRepo userRepo, BCryptPasswordEncoder passwordEncoder){
+
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
@@ -30,13 +28,9 @@ public class UserService {
     public void create(@Valid User userr){
         User user = new User();
         user.setUsername(userr.getUsername());
+        user.setEmail(userr.getEmail());
         user.setPassword(passwordEncoder.encode(userr.getPassword()));
         userRepo.save(user);
     }
 
-    public void recordAdd(UserRecord record,Principal principal){
-        User user = userRepo.findByUsername(principal.getName()).get();
-        record.setUser(user);
-        userRecordRepo.save(record);
-    }
 }

@@ -20,15 +20,9 @@ import java.util.*;
 @Controller
 public class AdminController {
 
-    private static final Logger logger = LoggerFactory.getLogger(RecordController.class);
-
-    private final UserRecordRepo userRecordRepo;
-
     private final UserRepo userRepo;
 
-
-    public AdminController(UserRecordRepo userRecordRepo, UserRepo userRepo) {
-        this.userRecordRepo = userRecordRepo;
+    public AdminController(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 

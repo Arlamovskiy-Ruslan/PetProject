@@ -3,6 +3,7 @@ package com.pet.project.controllers;
 import com.pet.project.models.UserRecord;
 import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;
+import com.pet.project.service.RecordService;
 import com.pet.project.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,15 +23,12 @@ public class RecordController {
 
     private final UserRecordRepo userRecordRepo;
 
-    private final UserRepo userRepo;
+    private final RecordService recordService;
 
     @Autowired
-    private final UserService userService;
-
-    public RecordController(UserRecordRepo userRecordRepo, UserRepo userRepo, UserService userService) {
+    public RecordController(UserRecordRepo userRecordRepo, RecordService recordService) {
         this.userRecordRepo = userRecordRepo;
-        this.userRepo = userRepo;
-        this.userService = userService;
+        this.recordService = recordService;
     }
 
     @GetMapping("/records")
@@ -58,7 +56,7 @@ public class RecordController {
             ,@RequestParam String last_name
             ,@RequestParam String problem
             , UserRecord record , Principal principal) {
-        userService.recordAdd(record,principal);
+        recordService.recordAdd(record,principal);
         UserRecord user_rec_add = new UserRecord(first_name,name,last_name,problem);
         userRecordRepo.save(user_rec_add);
         return "redirect:/records";

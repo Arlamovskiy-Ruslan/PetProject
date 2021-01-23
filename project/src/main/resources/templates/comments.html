@@ -36,6 +36,7 @@
 <div class="container mt-5">
     <h1 align="center">Додати відгук</h1>
     <form action="/comments" method="post">
+        <a>Your username: <td class="color_text_username" th:text="${username}"></td></a>
         <textarea name="problem" placeholder="Відгук" class="form-control"></textarea><br/>
         <button type="submit" class="btn btn-success">Добавити</button>
     </form>

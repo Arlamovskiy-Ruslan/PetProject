@@ -2,7 +2,6 @@ package com.pet.project.models;
 
 import javax.persistence.*;
 
-
 @Entity
 public class UserRecord {
     @Id

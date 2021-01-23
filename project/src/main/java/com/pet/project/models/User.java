@@ -6,8 +6,6 @@ import javax.persistence.*;
 import java.util.List;
 
 
-
-@Data
 @Entity
 public class User {
 
@@ -32,6 +30,20 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private Status status = Status.ACTIVE;
 
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<UserRecord> userRecords;
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Comment> comments;
+
     public Role getRole() {
         return role;
     }
@@ -50,20 +62,6 @@ public class User {
         this.role = role;
         this.status = status;
     }
-
-    @OneToMany(
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<UserRecord> userRecords;
-
-    @OneToMany(
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Comments> comments;
 
     public User(String username, String password,String email) {
         this.email = email;
@@ -100,8 +98,7 @@ public class User {
         this.password = password;
     }
 
-    public User() {
-    }
+    public User() { }
 
     public List<UserRecord> getUserRecords() { return userRecords; }
 
@@ -109,7 +106,7 @@ public class User {
         this.userRecords = userRecords;
     }
 
-    public List<Comments> getComments() { return comments; }
+    public List<Comment> getComments() { return comments; }
 
-    public void setComments(List<Comments> comments) { this.comments = comments; }
+    public void setComments(List<Comment> comments) { this.comments = comments; }
 }
