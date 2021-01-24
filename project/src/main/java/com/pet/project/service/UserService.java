@@ -1,26 +1,28 @@
 package com.pet.project.service;
 
 import com.pet.project.models.User;
-import com.pet.project.models.UserRecord;
-import com.pet.project.repo.UserRecordRepo;
+
 import com.pet.project.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.validation.Valid;
-import java.security.Principal;
+import java.util.UUID;
 
 @Service
 public class UserService {
+
+    private final MailSender mailSender;
 
     private final UserRepo userRepo;
 
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepo userRepo, BCryptPasswordEncoder passwordEncoder){
-
+    public UserService(MailSender mailSender,UserRepo userRepo, BCryptPasswordEncoder passwordEncoder){
+        this.mailSender = mailSender;
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
@@ -29,8 +31,35 @@ public class UserService {
         User user = new User();
         user.setUsername(userr.getUsername());
         user.setEmail(userr.getEmail());
+        user.setActivationCode(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(userr.getPassword()));
         userRepo.save(user);
+
+        if (!StringUtils.isEmpty(user.getEmail())){
+            String message = String.format(
+                    "Hello, %s! \n"+
+                            "Welcome to PetProject.Please visit next link: http://localhost:8080/activate/%s",
+                    user.getUsername(),
+                    user.getActivationCode()
+            );
+
+            mailSender.send(user.getEmail(), "Activation code",message);
+        }
+
+    }
+
+    public boolean activateUser(String code) {
+        User user = userRepo.findByActivationCode(code);
+
+        if (user == null){
+            return false;
+        }
+
+        user.setActivationCode(null);
+
+        userRepo.save(user);
+
+        return true;
     }
 
 }
