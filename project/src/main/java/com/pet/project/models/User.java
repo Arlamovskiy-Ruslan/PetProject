@@ -1,13 +1,14 @@
 package com.pet.project.models;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 
 @Entity
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,13 +37,6 @@ public class User {
             orphanRemoval = true
     )
     private List<UserRecord> userRecords;
-
-    @OneToMany(
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private List<Comment> comments;
 
     public Role getRole() {
         return role;
@@ -105,8 +99,4 @@ public class User {
     public void setUserRecords(List<UserRecord> userRecords) {
         this.userRecords = userRecords;
     }
-
-    public List<Comment> getComments() { return comments; }
-
-    public void setComments(List<Comment> comments) { this.comments = comments; }
-}
+   }
