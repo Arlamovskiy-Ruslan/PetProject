@@ -23,6 +23,8 @@ public class UserRecord {
     @ManyToOne
     private User user;
 
+    public UserRecord() {
+    }
 
     public UserRecord(String first_name, String name, String last_name, String problem) {
     }
