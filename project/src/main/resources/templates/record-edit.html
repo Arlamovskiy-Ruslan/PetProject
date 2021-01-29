@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head>
+    <title>Edit Record</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container mt-5">
+    <h1 align="center">Edit Page</h1>
+    <div th:each="rec : ${record_edit}">
+        <form method="post">
+            <b>First name:</b><input type="text" th:value="${rec.first_name}" name="first_name" placeholder="First name" class="form-control"><br/>
+            <b>Name:</b><input type="text" th:value="${rec.name}" name="name" placeholder="Name" class="form-control"><br/>
+            <b>Last name:</b><input type="text" th:value="${rec.last_name}" name="last_name" placeholder="Last name" class="form-control"><br/>
+            <b>Problem:</b><textarea type="text" th:value="${rec.problem}" name="problem" placeholder="Problem" class="form-control"></textarea><br/>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

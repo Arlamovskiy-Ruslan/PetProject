@@ -11,13 +11,13 @@ public class UserRecord {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+
     private String name;
 
     private String first_name;
-    @Column(nullable = false)
+
     private String last_name;
-    @Column(nullable = false)
+
     private String problem;
 
     @ManyToOne

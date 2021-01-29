@@ -25,11 +25,18 @@
 <div class="container mt-5">
     <h2 align="center">Записи</h2>
     <div class="record" th:each="us : ${users_rec}">
+        <table>
+
+
         <p><b>Прізвище :</b> <a th:text="${us.first_name}"/><br/>
         <b>Ім'я :</b><a th:text="${us.name}"  /><br/>
             <b>По батькові :</b><a th:text="${us.last_name}"  /><br/>
             <b>Проблема :</b><a th:text="${us.problem}"  /></p>
 
+                <a th:href="@{record-delete/{id}(id=${us.id})}">Delete</a>
+                <a th:href="@{/record/{id}/edit(id=${us.id})}">Edit</a>
+
+        </table>
     </div>
 </div>
 
