@@ -47,4 +47,5 @@ public class LoginTest {
 		.andExpect(status().is3xxRedirection())
 		.andExpect(redirectedUrl("http://localhost/login"));
 	}
+
 }
