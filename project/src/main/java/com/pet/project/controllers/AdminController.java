@@ -27,7 +27,7 @@ public class AdminController {
     }
 
     @GetMapping("/user-list")
-    @PreAuthorize("hasAuthority('user:edit')")
+    @PreAuthorize("hasAnyAuthority('user:edit')")
     public String userList(Model model, Principal principal) {
         String name = principal.getName();
         model.addAttribute("username",name);

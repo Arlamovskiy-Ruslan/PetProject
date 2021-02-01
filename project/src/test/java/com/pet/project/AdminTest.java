@@ -1,5 +1,7 @@
 package com.pet.project;
 
+import com.pet.project.models.Permission;
+import com.pet.project.models.Role;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,5 +53,12 @@ public class AdminTest {
         mockMvc
                 .perform(get("/user-list"))
                 .andExpect(status().isForbidden());
+    }
+    @Test
+    @WithMockUser(username = "k", password = "$2a$12$vf22oHi7VDYXG./pNQeIi..Yg1m9QyL5cqa7ctjbdOpi4bm0Y/e8e" ,authorities = "user:edit")
+    public void adminAvailableForAdmin() throws Exception {
+        mockMvc
+                .perform(get("/user-list"))
+                .andExpect(status().isOk());
     }
 }
