@@ -1,7 +1,6 @@
 package com.pet.project.service;
 
 import com.pet.project.models.User;
-
 import com.pet.project.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

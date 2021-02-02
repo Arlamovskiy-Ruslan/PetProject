@@ -1,21 +1,15 @@
 package com.pet.project.controllers;
 
-import com.pet.project.models.User;
 import com.pet.project.models.UserRecord;
 import com.pet.project.repo.UserRecordRepo;
-import com.pet.project.repo.UserRepo;
 import com.pet.project.service.RecordService;
-import com.pet.project.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -69,12 +63,12 @@ public class RecordController {
     public String reсord_add(Model model, Principal principal) {
         String name = principal.getName();
         model.addAttribute("username",name);
-        return "record-add";
+        return "records-add";
 
     }
 
-
-    @PostMapping("/record-add")
+    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping("/records-add")
     public String record_add_post
             (@RequestParam String first_name
             ,@RequestParam String name

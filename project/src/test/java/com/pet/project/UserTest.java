@@ -43,4 +43,5 @@ public class UserTest {
                 .andExpect(redirectedUrlPattern("**/login"));
     }
 
+
 }
