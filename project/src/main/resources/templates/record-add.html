@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+<head>
+    <title>Record Add</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<header th:insert="blocks/header :: header"></header>
+
+<div class="container mt-5">
+    <h1 align="center">Регістрація на прийом</h1>
+    <form action="/records-add" method="post" th:object="${user_rec}">
+        <div class="form-group">
+        <input type="text" id="first_name"  th:field="*{first_name}"placeholder="first_name" class="form-control"><br/>
+        </div>
+        <div class="form-group">
+        <input type="text" id="name" th:field="*{name}" placeholder="name" class="form-control"><br/>
+        </div>
+            <div class="form-group">
+        <input type="text" id="last_name" th:field="*{last_name}" placeholder="last_name" class="form-control"><br/>
+            </div>
+                <div class="form-group">
+        <textarea id="problem" placeholder="first_name" th:field="*{problem}" class="form-control"></textarea><br/>
+                </div>
+
+        <button type="submit" class="btn btn-success">Зареєстуватись</button>
+    </form>
+</div>
+</body>
+</html>
+

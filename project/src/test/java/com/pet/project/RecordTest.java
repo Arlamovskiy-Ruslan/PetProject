@@ -14,13 +14,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -38,5 +38,35 @@ public class RecordTest {
                 .alwaysDo(print())
                 .build();
     }
+    @Test
+    @WithMockUser(username = "f", password = "$2a$12$3uheMmTAAdfFISyZ5PMD6eKowI3pKdhXNxd7ontahntwSD4mfzOMq" ,authorities = "user:read")
+    public void recordsAvailableForUsers() throws Exception {
+        mockMvc
+                .perform(get("/records"))
+                .andExpect(status().isOk());
+    }
+    @Test
+    @WithMockUser(username = "f", password = "$2a$12$3uheMmTAAdfFISyZ5PMD6eKowI3pKdhXNxd7ontahntwSD4mfzOMq" ,authorities = "user:read")
+    public void recordsAddAvailableForUsers() throws Exception {
+        mockMvc
+                .perform(get("/record-add"))
+                .andExpect(status().isOk());
+    }
+    @Test
+    @WithMockUser(username = "f", password = "$2a$12$3uheMmTAAdfFISyZ5PMD6eKowI3pKdhXNxd7ontahntwSD4mfzOMq" ,authorities = "user:read")
+    public void userIsAuthorizedToCreateRecord() throws Exception {
 
+        mockMvc
+
+                .perform(
+                        post("/record-add")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("first_name", "titi")
+                                .param("name", "toto")
+                                .param("last_name", "toto")
+                                .param("problem", "titi")
+                )
+
+                .andExpect(status().isOk());
+    }
 }

@@ -31,6 +31,7 @@ public class RecordController {
     }
 
     @GetMapping("/records")
+    @PreAuthorize("hasAuthority('user:read')")
     public String records(Model model , Principal principal) {
         logger.info("User name: {}", principal.getName());
         model.addAttribute("users_rec", userRecordRepo.findByUserUsername(principal.getName()));
@@ -60,23 +61,27 @@ public class RecordController {
     }
 
     @GetMapping("/record-add")
+    @PreAuthorize("hasAuthority('user:read')")
     public String reсord_add(Model model, Principal principal) {
         String name = principal.getName();
+        model.addAttribute("user_rec",new UserRecord());
         model.addAttribute("username",name);
-        return "records-add";
+        return "record-add";
 
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    @PostMapping("/records-add")
+    @PostMapping("/record-add")
+    @PreAuthorize("hasAuthority('user:read')")
     public String record_add_post
             (@RequestParam String first_name
             ,@RequestParam String name
             ,@RequestParam String last_name
             ,@RequestParam String problem
-            , UserRecord record , Principal principal) {
+            , UserRecord record , Principal principal , Model model) {
         recordService.recordAdd(record,principal);
         UserRecord user_rec_add = new UserRecord(first_name,name,last_name,problem);
+
         userRecordRepo.save(user_rec_add);
         return "redirect:/records";
     }
