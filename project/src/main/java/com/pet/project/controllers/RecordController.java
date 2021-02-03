@@ -42,7 +42,7 @@ public class RecordController {
     }
 
     @GetMapping("/record/{id}/edit")
-    public String userEdit(@PathVariable(value = "id")long id,Model model){
+    public String recordEdit(@PathVariable(value = "id")long id,Model model){
         if(!userRecordRepo.existsById(id)){
             return "redirect:/user-list";
         }
@@ -55,7 +55,7 @@ public class RecordController {
 
 
     @PostMapping("/record/{id}/edit")
-    public String userEditPost(@PathVariable(value = "id")long id, @RequestParam String first_name, @RequestParam String name, @RequestParam String last_name,@RequestParam String problem, Model model){
+    public String recordEditPost(@PathVariable(value = "id")long id, @RequestParam String first_name, @RequestParam String name, @RequestParam String last_name,@RequestParam String problem, Model model){
         UserRecord userRecord = userRecordRepo.findById(id).orElseThrow();
         userRecord.setFirst_name(first_name);
         userRecord.setName(name);
