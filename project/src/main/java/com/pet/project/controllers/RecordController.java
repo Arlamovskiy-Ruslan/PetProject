@@ -6,12 +6,10 @@ import com.pet.project.service.RecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -32,7 +30,7 @@ public class RecordController {
         this.recordService = recordService;
     }
 
-    @GetMapping("/records")
+    @RequestMapping("/records")
     public String records(Model model , Principal principal) {
         logger.info("User name: {}", principal.getName());
         model.addAttribute("users_rec", userRecordRepo.findByUserUsername(principal.getName()));
@@ -41,7 +39,7 @@ public class RecordController {
         return "records";
     }
 
-    @GetMapping("/record/{id}/edit")
+    @RequestMapping("/record/{id}/edit")
     public String recordEdit(@PathVariable(value = "id")long id,Model model){
         if(!userRecordRepo.existsById(id)){
             return "redirect:/user-list";
@@ -54,7 +52,7 @@ public class RecordController {
     }
 
 
-    @PostMapping("/record/{id}/edit")
+    @RequestMapping(value ="/record/{id}/edit", method = RequestMethod.POST)
     public String recordEditPost(@PathVariable(value = "id")long id, @RequestParam String first_name, @RequestParam String name, @RequestParam String last_name,@RequestParam String problem, Model model){
         UserRecord userRecord = userRecordRepo.findById(id).orElseThrow();
         userRecord.setFirst_name(first_name);
@@ -65,16 +63,17 @@ public class RecordController {
         return "redirect:/records";
     }
 
-    @GetMapping("/record-add")
+    @RequestMapping("/record-add")
     public String reсord_add(Model model, Principal principal) {
         String name = principal.getName();
-        model.addAttribute("user_rec",new UserRecord());
         model.addAttribute("username",name);
+        model.addAttribute("user_rec",new UserRecord());
         return "record-add";
 
     }
 
-    @PostMapping("/record-add")
+    @RequestMapping(value = "/records/record-add", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyAuthority('user:read')")
     public String record_add_post
             (@RequestParam String first_name
             ,@RequestParam String name
@@ -84,6 +83,7 @@ public class RecordController {
         recordService.recordAdd(record,principal);
         UserRecord user_rec_add = new UserRecord(first_name,name,last_name,problem);
 
+        model.addAttribute("user_rec",new UserRecord());
         userRecordRepo.save(user_rec_add);
         return "redirect:/records";
     }

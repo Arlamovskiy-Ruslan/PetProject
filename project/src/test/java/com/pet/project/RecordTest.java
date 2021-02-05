@@ -53,20 +53,17 @@ public class RecordTest {
                 .andExpect(status().isOk());
     }
     @Test
-    @WithMockUser(username = "f", password = "$2a$12$3uheMmTAAdfFISyZ5PMD6eKowI3pKdhXNxd7ontahntwSD4mfzOMq" ,authorities = "user:read")
-    public void userIsAuthorizedToCreateRecord() throws Exception {
+    @WithMockUser(username = "k", password = "$2a$12$vf22oHi7VDYXG./pNQeIi..Yg1m9QyL5cqa7ctjbdOpi4bm0Y/e8e" ,authorities = "user:read")
+    public void userOrAdminIsAuthorizedToCreateRecord() throws Exception {
 
-        mockMvc
-
-                .perform(
-                        post("/record-add")
+        mockMvc.perform(
+                        post("/records/record-add")
                                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                                 .param("first_name", "titi")
                                 .param("name", "toto")
                                 .param("last_name", "toto")
                                 .param("problem", "titi")
                 )
-
                 .andExpect(status().isOk());
     }
 }
