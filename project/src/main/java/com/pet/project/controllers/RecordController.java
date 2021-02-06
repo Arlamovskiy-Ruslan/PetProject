@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -74,17 +75,9 @@ public class RecordController {
 
     @RequestMapping(value = "/records/record-add", method = RequestMethod.POST)
     @PreAuthorize("hasAnyAuthority('user:read')")
-    public String record_add_post
-            (@RequestParam String first_name
-            ,@RequestParam String name
-            ,@RequestParam String last_name
-            ,@RequestParam String problem
-            , UserRecord record , Principal principal , Model model) {
-        recordService.recordAdd(record,principal);
-        UserRecord user_rec_add = new UserRecord(first_name,name,last_name,problem);
-
-        model.addAttribute("user_rec",new UserRecord());
-        userRecordRepo.save(user_rec_add);
+    public String record_add_post(@Valid UserRecord record , Principal principal , Model model) {
+        recordService.recordByUsername(record,principal);
+        recordService.createRecord(record);
         return "redirect:/records";
     }
 

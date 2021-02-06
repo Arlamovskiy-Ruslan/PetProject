@@ -7,7 +7,9 @@ import com.pet.project.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import java.security.Principal;
+import java.util.UUID;
 
 @Service
 public class RecordService {
@@ -22,9 +24,18 @@ public class RecordService {
         this.userRecordRepo = userRecordRepo;
     }
 
-    public void recordAdd(UserRecord record, Principal principal){
+    public void recordByUsername(UserRecord record, Principal principal) {
         User user = userRepo.findByUsername(principal.getName()).get();
         record.setUser(user);
         userRecordRepo.save(record);
+    }
+
+    public void createRecord(@Valid UserRecord userRecord) {
+        UserRecord userRec = new UserRecord();
+        userRec.setFirst_name(userRecord.getFirst_name());
+        userRec.setName(userRecord.getName());
+        userRec.setLast_name(userRecord.getLast_name());
+        userRec.setProblem(userRecord.getProblem());
+        userRecordRepo.save(userRec);
     }
 }
