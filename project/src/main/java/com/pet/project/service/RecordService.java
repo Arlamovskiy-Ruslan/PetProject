@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.UUID;
 
 @Service
 public class RecordService {

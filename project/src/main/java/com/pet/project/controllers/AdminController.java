@@ -3,17 +3,18 @@ package com.pet.project.controllers;
 import com.pet.project.models.Role;
 import com.pet.project.models.Status;
 import com.pet.project.models.User;
-import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Optional;
 
 
 
@@ -26,7 +27,7 @@ public class AdminController {
         this.userRepo = userRepo;
     }
 
-    @GetMapping("/user-list")
+    @RequestMapping("/user-list")
     @PreAuthorize("hasAnyAuthority('user:edit')")
     public String userList(Model model, Principal principal) {
         String name = principal.getName();
@@ -35,14 +36,14 @@ public class AdminController {
         return "user-list";
     }
 
-    @GetMapping("user-delete/{id}")
+    @RequestMapping("user-delete/{id}")
     @PreAuthorize("hasAuthority('user:delete')")
     public String deleteUser(@PathVariable("id")long id){
         userRepo.deleteById(id);
         return "redirect:/user-list";
     }
 
-    @GetMapping("/user/{id}/edit")
+   @RequestMapping("/user/{id}/edit")
     @PreAuthorize("hasAuthority('user:edit')")
     public String userEdit(@PathVariable(value = "id")long id,Model model){
         if(!userRepo.existsById(id)){
@@ -55,7 +56,7 @@ public class AdminController {
         return "user-edit";
     }
 
-    @PostMapping("/user/{id}/edit")
+    @RequestMapping(value = "/user/{id}/edit",method = RequestMethod.POST)
     @PreAuthorize("hasAuthority('user:edit')")
     public String userEditPost(@PathVariable(value = "id")long id, @RequestParam String username, @RequestParam Status status, Model model){
         User user = userRepo.findById(id).orElseThrow();
@@ -65,7 +66,7 @@ public class AdminController {
         return "redirect:/user-list";
     }
 
-    @GetMapping("/user/{id}/change-role")
+    @RequestMapping("/user/{id}/change-role")
     @PreAuthorize("hasAuthority('user:change_role')")
     public String userRoleEdit(@PathVariable(value = "id")long id,Model model){
         if(!userRepo.existsById(id)){
@@ -78,7 +79,7 @@ public class AdminController {
         return "change-role";
     }
 
-    @PostMapping("/user/{id}/change-role")
+    @RequestMapping(value = "/user/{id}/change-role",method = RequestMethod.POST)
     @PreAuthorize("hasAuthority('user:change_role')")
     public String userRoleEditPost(@PathVariable(value = "id")long id, Role role, Model model){
         User user = userRepo.findById(id).orElseThrow();
