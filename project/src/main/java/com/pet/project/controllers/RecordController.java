@@ -1,5 +1,6 @@
 package com.pet.project.controllers;
 
+import com.pet.project.models.User;
 import com.pet.project.models.UserRecord;
 import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.service.RecordService;
@@ -57,13 +58,8 @@ public class RecordController {
 
 
     @RequestMapping(value ="/record/{id}/edit", method = RequestMethod.POST)
-    public String recordEditPost(@PathVariable(value = "id")long id, @RequestParam String first_name, @RequestParam String name, @RequestParam String last_name,@RequestParam String problem, Model model){
-        UserRecord userRecord = userRecordRepo.findById(id).orElseThrow();
-        userRecord.setFirst_name(first_name);
-        userRecord.setName(name);
-        userRecord.setLast_name(last_name);
-        userRecord.setProblem(problem);
-        userRecordRepo.save(userRecord);
+    public String recordEditPost(@PathVariable(value = "id")long id,@Valid UserRecord userRecord, Model model){
+        recordService.editRecord(id,userRecord);
         return "redirect:/records";
     }
 

@@ -6,6 +6,7 @@ import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -36,5 +37,14 @@ public class RecordService {
         userRec.setLast_name(userRecord.getLast_name());
         userRec.setProblem(userRecord.getProblem());
         userRecordRepo.save(userRec);
+    }
+
+    public void editRecord(@PathVariable(value = "id")long id, @Valid UserRecord userRecordd){
+        UserRecord userRecord = userRecordRepo.findById(id).orElseThrow();
+        userRecord.setFirst_name(userRecordd.getFirst_name());
+        userRecord.setName(userRecordd.getName());
+        userRecord.setLast_name(userRecordd.getLast_name());
+        userRecord.setProblem(userRecordd.getProblem());
+        userRecordRepo.save(userRecord);
     }
 }
