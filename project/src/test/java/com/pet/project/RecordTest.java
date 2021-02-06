@@ -64,6 +64,7 @@ public class RecordTest {
                                 .param("last_name", "toto")
                                 .param("problem", "titi")
                 )
-                .andExpect(status().isOk());
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/records"));
     }
 }
