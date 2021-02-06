@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.validation.Valid;
 import java.util.UUID;
@@ -60,5 +61,18 @@ public class UserService {
 
         return true;
     }
+
+    public void editStatusUser(@PathVariable(value = "id")long id,@Valid User userr){
+        User user = userRepo.findById(id).orElseThrow();
+        user.setUsername(userr.getUsername());
+        user.setStatus(userr.getStatus());
+        userRepo.save(user);
+    }
+    public void editRoleUser(@PathVariable(value = "id")long id,@Valid User userr){
+        User user = userRepo.findById(id).orElseThrow();
+        user.setRole(userr.getRole());
+        userRepo.save(user);
+    }
+
 
 }

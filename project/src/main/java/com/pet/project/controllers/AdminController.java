@@ -4,6 +4,8 @@ import com.pet.project.models.Role;
 import com.pet.project.models.Status;
 import com.pet.project.models.User;
 import com.pet.project.repo.UserRepo;
+import com.pet.project.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -21,10 +24,13 @@ import java.util.Optional;
 @Controller
 public class AdminController {
 
+    private final UserService userService;
+
     private final UserRepo userRepo;
 
-    public AdminController(UserRepo userRepo) {
+    public AdminController(UserRepo userRepo,UserService userService) {
         this.userRepo = userRepo;
+        this.userService = userService;
     }
 
     @RequestMapping("/user-list")
@@ -58,11 +64,8 @@ public class AdminController {
 
     @RequestMapping(value = "/user/{id}/edit",method = RequestMethod.POST)
     @PreAuthorize("hasAuthority('user:edit')")
-    public String userEditPost(@PathVariable(value = "id")long id, @RequestParam String username, @RequestParam Status status, Model model){
-        User user = userRepo.findById(id).orElseThrow();
-        user.setUsername(username);
-        user.setStatus(status);
-        userRepo.save(user);
+    public String userEditPost(@PathVariable(value = "id")long id, @Valid User user, Model model){
+        userService.editStatusUser(id,user);
         return "redirect:/user-list";
     }
 
@@ -81,10 +84,8 @@ public class AdminController {
 
     @RequestMapping(value = "/user/{id}/change-role",method = RequestMethod.POST)
     @PreAuthorize("hasAuthority('user:change_role')")
-    public String userRoleEditPost(@PathVariable(value = "id")long id, Role role, Model model){
-        User user = userRepo.findById(id).orElseThrow();
-        user.setRole(role);
-        userRepo.save(user);
+    public String userRoleEditPost(@PathVariable(value = "id")long id,@Valid User user, Model model){
+        userService.editRoleUser(id,user);
         return "redirect:/user-list";
     }
 }
