@@ -16,8 +16,7 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -51,7 +50,7 @@ public class RecordTest {
     }
     @Test
     @WithMockUser(username = "k", password = "$2a$12$vf22oHi7VDYXG./pNQeIi..Yg1m9QyL5cqa7ctjbdOpi4bm0Y/e8e" ,authorities = "user:read")
-    public void userOrAdminIsAuthorizedToCreateRecord() throws Exception {
+    public void userIsAuthorizedToCreateRecord() throws Exception {
 
         mockMvc.perform(
                         post("/records/record-add")
@@ -63,5 +62,22 @@ public class RecordTest {
                 )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/records"));
+
+    }
+
+    @Test
+    public void userIsNotAuthorizedToCreateRecord() throws Exception {
+
+        mockMvc.perform(
+                post("/records/record-add")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("first_name", "titi")
+                        .param("name", "toto")
+                        .param("last_name", "toto")
+                        .param("problem", "titi")
+        )
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrlPattern("**/login"));
+
     }
 }
