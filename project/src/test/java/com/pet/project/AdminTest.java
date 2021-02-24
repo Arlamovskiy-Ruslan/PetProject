@@ -64,7 +64,7 @@ public class AdminTest {
                 .perform(
                         post("/user/23/edit")
                             .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                            .param("username", "ff")
+                            .param("username", "f")
                             .param("status", "BANNED"))
 
                 .andExpect(status().is3xxRedirection())
@@ -82,6 +82,19 @@ public class AdminTest {
 
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/user-list"));
+
+    }
+    @Test
+    @WithMockUser(username = "f", password = "$2a$12$3uheMmTAAdfFISyZ5PMD6eKowI3pKdhXNxd7ontahntwSD4mfzOMq" ,authorities = "user:edit")
+    public void moderCantChangeRole() throws Exception {
+        mockMvc
+                .perform(
+                        post("/user/1/change-role")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("role", "MODERATOR"))
+
+                .andExpect(status().isForbidden());
+
 
     }
 }
