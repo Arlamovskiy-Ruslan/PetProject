@@ -71,4 +71,17 @@ public class AdminTest {
                 .andExpect(redirectedUrl("/user-list"));
 
     }
+    @Test
+    @WithMockUser(username = "k", password = "$2a$12$vf22oHi7VDYXG./pNQeIi..Yg1m9QyL5cqa7ctjbdOpi4bm0Y/e8e" ,authorities = "user:change_role")
+    public void adminCanChangeRole() throws Exception {
+        mockMvc
+                .perform(
+                        post("/user/23/change-role")
+                                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                                .param("role", "MODERATOR"))
+
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/user-list"));
+
+    }
 }
