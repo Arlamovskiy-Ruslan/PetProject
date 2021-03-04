@@ -18,13 +18,23 @@ public class UserRecord {
 
     private String problem;
 
+    private String mail;
+
     @ManyToOne
     private User user;
 
-    public UserRecord() {
+    public UserRecord(Long id, String name, String first_name, String last_name, String problem, String mail, User user) {
+        this.id = id;
+        this.name = name;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.problem = problem;
+        this.mail = mail;
+        this.user = user;
     }
 
-    public UserRecord(String first_name, String name, String last_name, String problem) {
+    public UserRecord() {
+
     }
 
     public Long getId() {
@@ -65,6 +75,14 @@ public class UserRecord {
 
     public void setProblem(String problem) {
         this.problem = problem;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public User getUser() {
