@@ -35,34 +35,6 @@ public class RecordController {
         this.recordService = recordService;
     }
 
-    @RequestMapping("/records")
-    public String records(Model model , Principal principal) {
-        logger.info("User name: {}", principal.getName());
-        model.addAttribute("users_rec", userRecordRepo.findByUserUsername(principal.getName()));
-        String name = principal.getName();
-        model.addAttribute("username",name);
-        return "records";
-    }
-
-    @RequestMapping("/record/{id}/edit")
-    public String recordEdit(@PathVariable(value = "id")long id,Model model){
-        if(!userRecordRepo.existsById(id)){
-            return "redirect:/user-list";
-        }
-        Optional<UserRecord> record = userRecordRepo.findById(id);
-        ArrayList<UserRecord> res = new ArrayList<>();
-        record.ifPresent(res::add);
-        model.addAttribute("record_edit",res);
-        return "record-edit";
-    }
-
-
-    @RequestMapping(value ="/record/{id}/edit", method = RequestMethod.POST)
-    public String recordEditPost(@PathVariable(value = "id")long id,@Valid UserRecord userRecord, Model model){
-        recordService.editRecord(id,userRecord);
-        return "redirect:/records";
-    }
-
     @RequestMapping("/record-add")
     public String reсord_add(Model model, Principal principal) {
         String name = principal.getName();
@@ -77,7 +49,7 @@ public class RecordController {
     public String record_add_post(@Valid UserRecord record , Principal principal , Model model) {
         recordService.recordByUsername(record,principal);
         recordService.createRecord(record);
-        return "redirect:/records";
+        return "redirect:/";
     }
 
 
