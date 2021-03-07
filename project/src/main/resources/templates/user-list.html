@@ -38,14 +38,14 @@
         <table>
             <thead>
             <tr>
-                <th><b>Id</b></th>
-                <th><b>User</b></th>
-                <th><b>Email</b></th>
-                <th><b>Role</b></th>
-                <th><b>Status</b></th>
-                <th sec:authorize="hasAnyAuthority('user:delete')"><b>Delete</b></th>
-                <th sec:authorize="hasAnyAuthority('user:edit')"><b>Edit</b></th>
-                <th sec:authorize="hasAnyAuthority('user:change_role')"><b>Change Role</b></th>
+                <th width="200" height="100"><b>Id</b></th>
+                <th width="200" height="100"><b>User</b></th>
+                <th  style="text-align: center" width="400" height="100"><b>Email</b></th>
+                <th width="200" height="100"><b>Role</b></th>
+                <th width="200" height="100"><b>Status</b></th>
+                <th width="200" height="100" sec:authorize="hasAnyAuthority('user:delete')"><b>Delete</b></th>
+                <th width="200" height="100" sec:authorize="hasAnyAuthority('user:edit')"><b>Edit</b></th>
+                <th width="200" height="100" sec:authorize="hasAnyAuthority('user:change_role')"><b>Change Role</b></th>
 
             </tr>
             </thead>
