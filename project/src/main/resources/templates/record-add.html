@@ -15,19 +15,19 @@
     <form th:action="@{/records/record-add}" method="post" th:object="${user_rec}">
 
         <div class="form-group">
-            <input type="text" id="first_name" th:field="*{first_name}" placeholder="First name" class="form-control"><br/>
+            <b>First name:</b><input type="text" id="first_name" th:field="*{first_name}" placeholder="First name" class="form-control"><br/>
         </div>
         <div class="form-group">
-            <input type="text" id="name" th:field="*{name}" placeholder="Name" class="form-control"><br/>
+            <b>Name:</b><input type="text" id="name" th:field="*{name}" placeholder="Name" class="form-control"><br/>
         </div>
         <div class="form-group">
-            <input type="text" id="last_name" th:field="*{last_name}" placeholder="Last name" class="form-control"><br/>
+            <b>Last name:</b><input type="text" id="last_name" th:field="*{last_name}" placeholder="Last name" class="form-control"><br/>
         </div>
         <div class="form-group">
-            <input type="text" id="mail" th:field="*{mail}" placeholder="Mail" class="form-control"><br/>
+            <b>Mail:</b><input type="text" id="mail" th:field="*{mail}" placeholder="Mail" class="form-control"><br/>
         </div>
         <div class="form-group">
-            <input type="text" id="problem" th:field="*{problem}" placeholder="Problem" class="form-control"><br/>
+            <b>Problem:</b><input type="text" id="problem" th:field="*{problem}" placeholder="Problem" class="form-control"><br/>
         </div>
 
         <button type="submit" class="btn btn-success">Зареєстуватись</button>
