@@ -69,4 +69,8 @@ public class RecordService {
         userRecordRepo.save(userRecord);
     }
 
+    public void createExelBd(UserRecord record ){
+
+    }
+
 }
