@@ -4,13 +4,21 @@ import com.pet.project.models.User;
 import com.pet.project.models.UserRecord;
 import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;
+import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class RecordService {
@@ -69,8 +77,9 @@ public class RecordService {
         userRecordRepo.save(userRecord);
     }
 
-    public void createExelBd(UserRecord record ){
-
-    }
 
 }
+
+
+
+
