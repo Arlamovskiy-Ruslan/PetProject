@@ -46,6 +46,7 @@
                 <th width="200" height="100" sec:authorize="hasAnyAuthority('user:delete')"><b>Delete</b></th>
                 <th width="200" height="100" sec:authorize="hasAnyAuthority('user:edit')"><b>Edit</b></th>
                 <th width="200" height="100" sec:authorize="hasAnyAuthority('user:change_role')"><b>Change Role</b></th>
+                <th width="200" height="100"> <a sec:authorize="hasAnyAuthority('user:edit')" th:href="@{/downloadExcel}">Download Database (User record)</a></th>
 
             </tr>
             </thead>

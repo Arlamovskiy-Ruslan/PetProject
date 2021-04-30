@@ -94,6 +94,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('user:edit')")
     public ModelAndView downloadExcel(Model model) {
 
         List<UserRecord> users = userRecordRepo.findAll();

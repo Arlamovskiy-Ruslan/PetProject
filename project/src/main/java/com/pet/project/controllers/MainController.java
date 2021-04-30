@@ -19,14 +19,6 @@ import java.util.List;
 @RequestMapping("/")
 public class MainController {
 
-    private final UserRecordRepo userRecordRepo;
-
-    @Autowired
-    public MainController(UserRecordRepo userRecordRepo) {
-        this.userRecordRepo = userRecordRepo;
-
-    }
-
     @Autowired
     UserService userService;
 
@@ -39,13 +31,6 @@ public class MainController {
         String name = principal.getName();
         model.addAttribute("username",name);
         return "home";
-    }
-
-    @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
-    public ModelAndView downloadExcel(Model model) {
-
-        List<UserRecord> users = userRecordRepo.findAll();
-        return new ModelAndView(new ExcelView(), "user_rec", users );
     }
 }
 
