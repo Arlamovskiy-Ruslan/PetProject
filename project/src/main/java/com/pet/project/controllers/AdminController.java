@@ -1,8 +1,7 @@
 package com.pet.project.controllers;
 
-import com.pet.project.models.Role;
-import com.pet.project.models.Status;
-import com.pet.project.models.User;
+import com.pet.project.models.*;
+import com.pet.project.repo.UserRecordRepo;
 import com.pet.project.repo.UserRepo;
 import com.pet.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -28,9 +29,12 @@ public class AdminController {
 
     private final UserRepo userRepo;
 
-    public AdminController(UserRepo userRepo,UserService userService) {
+    private final UserRecordRepo userRecordRepo;
+
+    public AdminController(UserRepo userRepo,UserService userService,UserRecordRepo userRecordRepo) {
         this.userRepo = userRepo;
         this.userService = userService;
+        this.userRecordRepo = userRecordRepo;
     }
 
     @RequestMapping("/user-list")
@@ -87,5 +91,12 @@ public class AdminController {
     public String userRoleEditPost(@PathVariable(value = "id")long id,@Valid User user, Model model){
         userService.editRoleUser(id,user);
         return "redirect:/user-list";
+    }
+
+    @RequestMapping(value = "/downloadExcel", method = RequestMethod.GET)
+    public ModelAndView downloadExcel(Model model) {
+
+        List<UserRecord> users = userRecordRepo.findAll();
+        return new ModelAndView(new ExcelView(), "user_rec", users );
     }
 }
