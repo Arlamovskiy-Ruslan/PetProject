@@ -15,7 +15,7 @@ public class ExcelView extends AbstractXlsView {
     public void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
                                    HttpServletResponse response) throws Exception {
 
-        response.setHeader("Content-Disposition", "attachment; filename=\"user-record-BD.xls\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"userRecords-BD.xls\"");
 
         @SuppressWarnings("unchecked")
         List<UserRecord> user_rec= (List<UserRecord>) model.get("user_rec");
@@ -41,6 +41,8 @@ public class ExcelView extends AbstractXlsView {
         header.getCell(3).setCellStyle(style);
         header.createCell(4).setCellValue("Mail");
         header.getCell(4).setCellStyle(style);
+        header.createCell(5).setCellValue("Feedback");
+        header.getCell(5).setCellStyle(style);
 
         int rowCount = 1;
         for(UserRecord userRecord : user_rec){
