@@ -15,7 +15,7 @@ public class ExcelView extends AbstractXlsView {
     public void buildExcelDocument(Map<String, Object> model, Workbook workbook, HttpServletRequest request,
                                    HttpServletResponse response) throws Exception {
 
-        response.setHeader("Content-Disposition", "attachment; filename=\"my-exported-file.xls\"");
+        response.setHeader("Content-Disposition", "attachment; filename=\"user-record-BD.xls\"");
 
         @SuppressWarnings("unchecked")
         List<UserRecord> user_rec= (List<UserRecord>) model.get("user_rec");
