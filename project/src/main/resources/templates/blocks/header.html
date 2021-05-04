@@ -1,16 +1,26 @@
 <div th:fragment="header" >
+
     <div class="d-flex h-100 text-center text-white bg-dark">
         <h3  align="center">Pet Project</h3><br/>
         <nav class="nav nav-masthead justify-content-center float-md-end">
             <a class="nav-link" href="/">Головна</a>
+
+
             <a class="nav-link" href="/record-add"> Реєстрація на прийом </a>
-            <div sec:authorize="isAnonymous()" class="from-inline my-2 my-lg-0">
-                <a class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Увійти</a>
+
+            <a sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:text="${username}" />
+
+            <div style="float: right" sec:authorize="isAnonymous()" class="from-inline my-2 my-lg-0">
+                <a  class="btn btn-outline-success my-2 mr-2 my-sm-0" th:href="@{/login}">Увійти</a>
             </div>
-            <form sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
-                <button class="btn btn-outline-success my-2 my-sm-0">Вийти</button>
+
+
+            <form style="float: right" sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:action="@{/logout}" method="post">
+                <button  class="btn btn-outline-success my-2 my-sm-0">Вийти</button>
             </form>
-            <div sec:authorize="hasAnyAuthority('user:write',
+
+
+            <div style="float: right" sec:authorize="hasAnyAuthority('user:write',
                                             'user:add',
                                             'user:edit',
                                             'user:delete',
@@ -18,7 +28,7 @@
                                             'user:change_role')" class="from-inline my-2 my-lg-0">
                 <a class="btn btn-outline-success my-2 mr-2 my-sm-0" href="/user-list" >Admin/Moder Panel</a>
             </div>
-            <a sec:authorize="isAuthenticated()" class="from-inline my-2 my-lg-0" th:text="${username}" />
+
         </nav>
     </div>
 </div>
