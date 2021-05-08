@@ -26,13 +26,12 @@ public class UserService {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
     }
-
-    public void create(@Valid User userr){
+    public void create(@Valid User userModel){
         User user = new User();
-        user.setUsername(userr.getUsername());
-        user.setEmail(userr.getEmail());
+        user.setUsername(userModel.getUsername());
+        user.setEmail(userModel.getEmail());
         user.setActivationCode(UUID.randomUUID().toString());
-        user.setPassword(passwordEncoder.encode(userr.getPassword()));
+        user.setPassword(passwordEncoder.encode(userModel.getPassword()));
         userRepo.save(user);
 
         if (!StringUtils.isEmpty(user.getEmail())){
@@ -47,25 +46,21 @@ public class UserService {
         }
 
     }
-
     public boolean activateUser(String code) {
         User user = userRepo.findByActivationCode(code);
 
         if (user == null){
             return false;
         }
-
         user.setActivationCode(null);
-
         userRepo.save(user);
 
         return true;
     }
-
-    public void editStatusUser(@PathVariable(value = "id")long id,@Valid User userr){
+    public void editStatusUser(@PathVariable(value = "id")long id,@Valid User userModel){
         User user = userRepo.findById(id).orElseThrow();
-        user.setUsername(userr.getUsername());
-        user.setStatus(userr.getStatus());
+        user.setUsername(userModel.getUsername());
+        user.setStatus(userModel.getStatus());
         userRepo.save(user);
     }
     public void editRoleUser(@PathVariable(value = "id")long id,@Valid User userr){
@@ -73,6 +68,4 @@ public class UserService {
         user.setRole(userr.getRole());
         userRepo.save(user);
     }
-
-
 }
