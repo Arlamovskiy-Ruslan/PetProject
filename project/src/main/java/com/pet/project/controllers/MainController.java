@@ -32,5 +32,15 @@ public class MainController {
         model.addAttribute("username",name);
         return "home";
     }
+
+    @RequestMapping("/about")
+    public String about(){
+        return "about";
+    }
+
+    @RequestMapping("/contacs")
+    public String contacs(){
+        return "contacts";
+    }
 }
 
