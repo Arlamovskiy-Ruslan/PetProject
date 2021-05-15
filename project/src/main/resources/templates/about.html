@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>About</title>
+    <meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style type="text/css">
+        .about {
+            background-color: #feeff4;
+            border-left: 6px solid #ACF8E2;
+            color: #49152c;
+            padding: 20px 35px;
+            font-family: 'Lato', sans-serif;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
+
+<header th:insert="blocks/header1 :: header1"></header>
+
+<div class="container mt-5">
+    <h2 align="center">Price list</h2>
+    <div class="about" >
+        <p>Ми – клініка домашнього затишку, де кращі медичні традиції поєднані з найновішими світовими технологіями.
+            Це дозволяє досягати <b>до 86 % успішності лікування безпліддя.</b></p>
+        <h3><b>Чому варто обрати саме “Альтернативу”?</b></h3>
+        <ul>
+            <li>ефективність лікування вища, ніж у європейських центрах репродуктології</li>
+            <li>чесні ціни</li>
+            <li>знижка 10% на другу та наступні спроби ЗІВ</li>
+            <li>лікування найскладніших випадків безпліддя</li>
+            <li>ми з Вами від діагностики до пологів</li>
+        </ul>
+        <p>Ви не знайдете іншу клініку, яка була б настільки “дружньою до пацієнта”,
+            адже у нас Ви завжди можете розраховувати на швидку та вичерпну інформацію щодо питань,
+            які Вас цікавлять, та отримати значно більше, ніж очікували.</p>
+    </div>
+</div>
+
 
 </body>
 </html>

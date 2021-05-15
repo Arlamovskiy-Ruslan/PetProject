@@ -1,10 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Contacts</title>
+    <meta  http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style type="text/css">
+        .price_list {
+            background-color: #feeff4;
+            border-left: 6px solid #ACF8E2;
+            color: #49152c;
+            padding: 20px 35px;
+            font-family: 'Lato', sans-serif;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
+
+<header th:insert="blocks/header1 :: header1"></header>
+
+<div class="container mt-5">
+    <h2 align="center">Price list</h2>
+    <div class="price_list" >
+        <p><b>1-</b>250 грн.</p>
+        <p><b>2-</b>150 грн.</p>
+        <p><b>3-</b>100 грн.</p>
+    </div>
+</div>
+
 
 </body>
 </html>
