@@ -30,6 +30,16 @@ public class ExcelView extends AbstractXlsView {
         font.setColor(HSSFColor.BLACK.index);
         style.setFont(font);
 
+        //
+        createRow(sheet, style);
+
+        //
+        createCell(user_rec, sheet);
+
+    }
+
+    public void createRow(Sheet sheet, CellStyle style){
+
         Row header = sheet.createRow(0);
         header.createCell(0).setCellValue("First Name");
         header.getCell(0).setCellStyle(style);
@@ -43,6 +53,9 @@ public class ExcelView extends AbstractXlsView {
         header.getCell(4).setCellStyle(style);
         header.createCell(5).setCellValue("Feedback");
         header.getCell(5).setCellStyle(style);
+    }
+
+    public void createCell(List<UserRecord> user_rec, Sheet sheet){
 
         int rowCount = 1;
         for(UserRecord userRecord : user_rec){
@@ -54,6 +67,5 @@ public class ExcelView extends AbstractXlsView {
             userRow.createCell(4).setCellValue(userRecord.getMail());
 
         }
-
     }
 }
