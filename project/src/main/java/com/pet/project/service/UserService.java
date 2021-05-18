@@ -33,7 +33,12 @@ public class UserService {
         user.setActivationCode(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(userModel.getPassword()));
         userRepo.save(user);
+        checkMailAndSend();
 
+    }
+
+    public void checkMailAndSend(){
+        User user = new User();
         if (!StringUtils.isEmpty(user.getEmail())){
             String message = String.format(
                     "Hello, %s! \n"+
@@ -44,8 +49,8 @@ public class UserService {
 
             mailSender.send(user.getEmail(), "Activation code",message);
         }
-
     }
+
     public boolean activateUser(String code) {
         User user = userRepo.findByActivationCode(code);
 
