@@ -43,7 +43,9 @@ public class RecordService {
         userRec.setMail(userRecord.getMail());
         userRec.setProblem(userRecord.getProblem());
         userRecordRepo.save(userRec);
-
+        sendRecord(userRecord);
+    }
+    public void sendRecord(UserRecord userRecord){
         if (!StringUtils.isEmpty(userRecord.getMail())) {
             String message = String.format(
                     "Your entry will be reviewed shortly \n" +
