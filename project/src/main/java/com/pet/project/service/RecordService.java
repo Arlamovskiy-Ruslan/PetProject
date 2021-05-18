@@ -45,6 +45,7 @@ public class RecordService {
         userRecordRepo.save(userRec);
         sendRecord(userRecord);
     }
+
     public void sendRecord(UserRecord userRecord){
         if (!StringUtils.isEmpty(userRecord.getMail())) {
             String message = String.format(
