@@ -33,11 +33,11 @@ public class UserService {
         user.setActivationCode(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(userModel.getPassword()));
         userRepo.save(user);
-        checkMailAndSend();
+        sendActivationCode();
 
     }
 
-    public void checkMailAndSend(){
+    public void sendActivationCode(){
         User user = new User();
         if (!StringUtils.isEmpty(user.getEmail())){
             String message = String.format(
